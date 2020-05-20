@@ -1,0 +1,20 @@
+FROM ubuntu:18.04
+
+RUN apt-get -y update \
+&& apt-get -y install build-essential \
+&& apt-get -y install tcsh
+
+COPY psipred-master /psipred
+COPY wrapper.sh /psipred/BLAST+/wrapper.sh
+COPY ncbi-blast-2.10.0+ /ncbi-blast-2.10.0+ 
+
+WORKDIR /psipred/BLAST+/
+
+RUN chmod +x wrapper.sh
+RUN cd ../src && make && make install
+
+ENV PATH="/uniref90_indexed:/ncbi-blast-2.10.0+/bin:/psipred:/psipred/src:/psipred/BLAST+:/psipred/bin:${PATH}"
+
+ENTRYPOINT ["/bin/bash"]
+
+CMD ["wrapper.sh"]

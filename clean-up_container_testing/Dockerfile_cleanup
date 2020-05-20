@@ -1,0 +1,14 @@
+FROM ubuntu:18.04
+
+RUN apt-get -y update
+
+RUN mkdir work_dir
+COPY clean-up.sh work_dir/clean-up.sh 
+
+WORKDIR /work_dir/
+
+ENV PATH="/work_dir:${PATH}"
+
+ENTRYPOINT ["/bin/bash"]
+
+CMD ["clean-up.sh"]
