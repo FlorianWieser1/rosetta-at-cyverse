@@ -1,7 +1,12 @@
 #!/bin/bash
 
+# Exit immediately if a non-zero status appears
+set -e
+
+# Execute PSIPRED+
 runpsipredplus *.fasta
 
+# Post processing - remove unneeded files and move computational output to a "results"-folder
 rm -f psitmp*
 
 mkdir psipred-plus_results

@@ -1,4 +1,5 @@
 FROM ubuntu:18.04
+
 MAINTAINER Florian Wieser
 LABEL Description="This image contains RosettaScripts (version 3.12) and is intended for integration in the Cyverse Austria Discovery Environmnet" 
 

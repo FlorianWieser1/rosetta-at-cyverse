@@ -18,5 +18,5 @@ fi
 
 # Post processing - move computational output to a "results"-folder
 mkdir rosetta-scripts_results
-mv *.pdb /de-app-work/rosetta-scripts_results
+mv *1.pdb /de-app-work/rosetta-scripts_results
 mv *.sc /de-app-work/rosetta-scripts_results
