@@ -1,4 +1,4 @@
-FROM ubuntu:16.04
+FROM ubuntu:18.04
 
 MAINTAINER Florian Wieser
 LABEL Description="This image contains Rosetta's abinitio protocol (version 3.12) and is intended for integration in the Cyverse Austria Discovery Environment"
@@ -10,6 +10,7 @@ WORKDIR ${WD}
 ENV ROSETTA3_DB ${WD}/database_complete
 
 COPY AbinitioRelax.static.linuxgccrelease ${WD}
+COPY extract_pdbs.static.linuxgccrelease ${WD}
 COPY wrapper_abinitio.sh ${WD} 
 
 ENTRYPOINT ["/working_dir/wrapper_abinitio.sh"]

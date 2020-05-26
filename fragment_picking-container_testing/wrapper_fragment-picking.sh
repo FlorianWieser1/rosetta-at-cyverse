@@ -3,6 +3,10 @@
 # Exit immediately if a non-zero status appears
 set -e
 
+ls -a > ls1.txt
+pwd > pwd1.txt
+
+
 # execute rosetta protocol
 APP_PATH="$(dirname $0)/fragment_picker.static.linuxgccrelease"
 $APP_PATH "$@"
@@ -19,6 +23,7 @@ else
 fi
 
 # Post processing - move computational output to a "results"-folder
+# Rename computational output in order to be recognized by the subsequent container (for use in workflows)
 mkdir fragment-picker_results
 
 mv *.pdb /de-app-work/fragment-picker_results

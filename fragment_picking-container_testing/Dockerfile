@@ -9,7 +9,7 @@ ENV WD /working_dir
 WORKDIR ${WD}
 ENV ROSETTA3_DB ${WD}/database_complete
 
-COPY filtered.vall.dat.2006-05-05.gz ${WD}/filtered.vall.dat.2006-05-05.gz
+COPY filtered.vall.dat.2006-05-05.gz ${WD}
 COPY fragment_picker.static.linuxgccrelease ${WD} 
 COPY wrapper_fragment-picking.sh ${WD}
 
