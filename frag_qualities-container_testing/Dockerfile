@@ -10,7 +10,7 @@ ENV WD /working_dir
 WORKDIR ${WD}
 ENV ROSETTA3_DB /database_complete
 
-ADD wrapper_fragment-qualities.sh ${WD}
 ADD r_frag_quality.static.linuxgccrelease ${WD} 
+ADD wrapper_fragment-qualities.sh ${WD}
 
 ENTRYPOINT ["/working_dir/wrapper_fragment-qualities.sh"]
