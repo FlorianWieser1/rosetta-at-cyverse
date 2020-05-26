@@ -14,6 +14,7 @@ tail -n +4 *.csv | cut -f2- > outfile
 # Generate contactMap plot
 python /working_dir/plot-contactmap.py outfile
 
-# Post processing - move computational output to a "results"-folder
+# Post processing - move computational output to a "results"-folder, remove outfile
 mkdir contactMap_results
 mv contact_map* /de-app-work/contactMap_results
+rm outfile

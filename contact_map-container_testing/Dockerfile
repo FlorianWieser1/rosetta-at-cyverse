@@ -1,4 +1,8 @@
 FROM ubuntu:18.04
+
+MAINTAINER Florian Wieser
+LABEL Description="This image contains Rosetta's contactMaps protocol (version 3.12) and is intended for integration in the CyVerse Austria Discovery Environment"
+
 RUN apt-get -y update \
 && apt-get -y install vim \ 
 && apt-get -y install gnuplot \
@@ -7,12 +11,10 @@ RUN apt-get -y update \
 
 ENV WD /working_dir
 WORKDIR ${WD}
-ENV ROSETTA3_DB /de-app-work/database_complete 
+ENV ROSETTA3_DB ${WD}/database_complete 
 
-ADD wrapper.sh ${WD}/wrapper.sh
-ADD plot-contactmap.py ${WD}/plot-contactmap.py
-ADD contactMap.static.linuxgccrelease ${WD}/contactMap.static.linuxgccrelease
+COPY contactMap.static.linuxgccrelease ${WD} 
+COPY wrapper_contact-map.sh ${WD}
+COPY plot-contactmap.py ${WD}
 
-ENV PATH="/working_dir/database:/working_dir:${PATH}"
-
-ENTRYPOINT ["/working_dir/wrapper.sh"]
+ENTRYPOINT ["/working_dir/wrapper_contact-map.sh"]
