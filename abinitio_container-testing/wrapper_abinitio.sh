@@ -17,6 +17,9 @@ else
     $APP_PATH "$@ -out:file:silent outfile.silent.o"
 fi
 
+ls > ls1.txt
+mv default.out outfile.silent.o
+
 # Extract pdbs from silent.out (the subsequent contactMaps container requires silent.out as input)
 /working_dir/extract_pdbs.static.linuxgccrelease -in:file:silent outfile.silent.o -database /de-app-work/database_complete
 
