@@ -7,6 +7,7 @@ set -e
 runpsipredplus *.fasta
 
 # Post processing - remove unneeded files and move computational output to a "results"-folder
+# Rename computational output for workflow functionality
 rm -f psitmp*
 
 mkdir psipred-plus_results

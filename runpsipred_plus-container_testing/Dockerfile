@@ -20,4 +20,4 @@ ENV PATH="/uniref90_indexed:/ncbi-blast-2.10.0+/bin:/psipred:/psipred/src:/psipr
 
 ENTRYPOINT ["/bin/bash"]
 
-CMD ["wrapper.sh"]
+CMD ["wrapper_psipred-plus.sh"]
