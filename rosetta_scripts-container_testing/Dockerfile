@@ -1,7 +1,7 @@
 FROM ubuntu:20.04
 
 MAINTAINER Florian Wieser
-LABEL Description="This image contains RosettaScripts (version 3.12) and is intended for integration in the Cyverse Austria Discovery Environmnet" 
+LABEL Description="This image contains RosettaScripts (version 3.12) and is intended for integration in the CyVerse Austria Discovery Environment" 
 
 RUN apt-get -y update
 
