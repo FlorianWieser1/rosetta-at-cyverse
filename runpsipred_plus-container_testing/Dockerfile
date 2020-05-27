@@ -1,4 +1,4 @@
-FROM ubuntu:18.04
+FROM ubuntu:20.04
 
 MAINTAINER Florian Wieser
 LABEL Description="This image contains the PSIPRED+ protein secondary structure prediction algorithm and is intended for integration in the CyVerse Austria Discovery Environment"

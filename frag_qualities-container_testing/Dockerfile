@@ -1,4 +1,4 @@
-FROM ubuntu:18.04
+FROM ubuntu:20.04
 
 MAINTAINER Florian Wieser
 LABEL Description="This image contains Rosetta's fragment qualities protocol (version 3.12) and is intended for integration in the CyVerse Austria Discovery Environment"
