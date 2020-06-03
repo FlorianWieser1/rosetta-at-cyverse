@@ -1,23 +1,20 @@
 FROM ubuntu:20.04
 
-MAINTAINER Florian Wieser
+MAINTAINER Florian Wieser <florian.wieser@tugraz.at>
 LABEL Description="This image contains the PSIPRED+ protein secondary structure prediction algorithm and is intended for integration in the CyVerse Austria Discovery Environment"
 
 RUN apt-get -y update \
 && apt-get -y install build-essential \
 && apt-get -y install tcsh
 
-COPY psipred-master /psipred
-COPY wrapper_psipred-plus.sh /psipred/BLAST+/wrapper_psipred-plus.sh
-COPY ncbi-blast-2.10.0+ /ncbi-blast-2.10.0+ 
+ENV WD /working_dir
+WORKDIR ${WD}
 
-WORKDIR /psipred/BLAST+/
+COPY psipred-master ${WD}/psipred-master
+COPY ncbi-blast-2.10.0+ ${WD}/ncbi-blast-2.10.0+ 
+COPY bioshell ${WD}/bioshell
+COPY wrapper_psipred-plus.sh ${WD}
 
-RUN chmod +x wrapper_psipred-plus.sh
-RUN cd ../src && make && make install
+ENV PATH="/working_dir/ncbi-blast-2.10.0+/bin:/working_dir/psipred-master/bin:/uniref90_indexed:/bioshell/bin/:${PATH}"
 
-ENV PATH="/uniref90_indexed:/ncbi-blast-2.10.0+/bin:/psipred:/psipred/src:/psipred/BLAST+:/psipred/bin:${PATH}"
-
-ENTRYPOINT ["/bin/bash"]
-
-CMD ["wrapper_psipred-plus.sh"]
+ENTRYPOINT ["/working_dir/wrapper_psipred-plus.sh"]

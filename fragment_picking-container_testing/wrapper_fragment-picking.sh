@@ -3,13 +3,7 @@
 # Exit immediately if a non-zero status appears
 set -e
 
-ls -a > ls1.txt
-pwd > pwd1.txt
-
-
-# execute rosetta protocol
 APP_PATH="$(dirname $0)/fragment_picker.static.linuxgccrelease"
-$APP_PATH "$@"
 
 # In case no "flags" or "options"-file is provided, execute Rosetta with the command-line parameters provided in the CyVerse Discovery Environment
 if [ -f "flags" ]
@@ -23,7 +17,7 @@ else
 fi
 
 # Post processing - move computational output to a "results"-folder
-# Rename computational output in order to be recognized by the subsequent container (for use in workflows)
+# Rename computational output in order to be recognized by the subsequent container (for workflow functionality)
 mkdir fragment-picker_results
 
 mv *.pdb /de-app-work/fragment-picker_results
