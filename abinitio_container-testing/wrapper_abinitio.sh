@@ -27,6 +27,7 @@ mv *.o outfile.silent.o
 # Extract pdbs from silent.out (the subsequent contactMaps container requires silent.out as input)
 /working_dir/extract_pdbs.static.linuxgccrelease -in:file:silent outfile.silent.o -database /de-app-work/database_complete
 
+
 # Post processing - move computational output to a "results"-folder
 # Rename computational output in order to be recognized by the subsequent containers (for workflow functionality)
 mkdir abinitio_results
@@ -34,3 +35,22 @@ mkdir abinitio_results
 mv *.fsc /de-app-work/abinitio_results
 mv *.pdb /de-app-work/abinitio_results
 cp outfile.silent.o /de-app-work/abinitio_results
+
+cd /de-app-work/abinitio_results
+mkdir pdbs
+
+mv *.pdb /de-app-work/abinitio_results/pdbs
+
+# Sort results by best-scoring structure and compute a Score-vs-RMSD plot
+cat score.fsc | (read -r; printf "%s\n" "$REPLY"; sort -n -k2 ) > score-sorted.fsc
+awk '{print $2 "\t" $14}' score-sorted.fsc | awk 'NR >1' > score-vs-rmsd.dat
+
+gnuplot <<-EOFMarker
+	set xlabel "RMSD [{\305}]"
+	set ylabel "Score [REU]"
+	set term png size 800,600
+	set output "score-vs-rmsd.png"
+	plot "score-vs-rmsd.dat" using 2:1 pointtype 20 ps 0.5 lc rgb "blue" notitle 
+EOFMarker
+
+rm score-vs-rmsd.dat
