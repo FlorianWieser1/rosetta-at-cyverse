@@ -45,12 +45,7 @@ mv *.pdb /de-app-work/abinitio_results/pdbs
 cat score.fsc | (read -r; printf "%s\n" "$REPLY"; sort -n -k2 ) > score-sorted.fsc
 awk '{print $2 "\t" $14}' score-sorted.fsc | awk 'NR >1' > score-vs-rmsd.dat
 
-gnuplot <<-EOFMarker
-	set xlabel "RMSD [{\305}]"
-	set ylabel "Score [REU]"
-	set term png size 800,600
-	set output "score-vs-rmsd.png"
-	plot "score-vs-rmsd.dat" using 2:1 pointtype 20 ps 0.5 lc rgb "blue" notitle 
-EOFMarker
+# Generate a Rosetta energy vs RSMD scatter plot
+python /working_dir/plot-score-vs-rmsd.py
 
 rm score-vs-rmsd.dat
