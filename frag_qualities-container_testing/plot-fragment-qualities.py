@@ -15,7 +15,7 @@ sequence=data[1]
 rmsd=data[3]
 
 # Set up plot dimensions, axis and title 
-plt.figure(figsize=(5, 3), dpi=600) 
+plt.figure(figsize=(5, 3), dpi=300) 
 plt.tight_layout()
 ax=plt.axes()
 ax.xaxis.set_major_locator(ticker.MultipleLocator(10))
