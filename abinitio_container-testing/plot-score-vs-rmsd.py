@@ -21,7 +21,7 @@ score=data[1]
 plt.figure(figsize=(5, 3), dpi=300)
 ax=plt.axes()
 ax.xaxis.set_major_locator(ticker.MultipleLocator(1))
-ax.yaxis.set_major_locator(ticker.MultipleLocator(1))
+ax.yaxis.set_major_locator(ticker.MultipleLocator(10))
 plt.title("Score-vs-RMSD")
 plt.xlabel("RMSD [$\AA$]")
 plt.ylabel("Score [REU]")
