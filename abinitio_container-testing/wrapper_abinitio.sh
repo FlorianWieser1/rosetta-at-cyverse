@@ -24,6 +24,9 @@ fi
 
 mv *.o outfile.silent.o
 
+input_pdb=$(find . -path ./database_complete -prune -false -o -name "*.pdb")
+echo $input_pdb > input_pdb.txt
+
 # Extract pdbs from silent.out (the subsequent contactMaps container requires silent.out as input)
 /working_dir/extract_pdbs.static.linuxgccrelease -in:file:silent outfile.silent.o -database /de-app-work/database_complete
 
@@ -40,12 +43,17 @@ cd /de-app-work/abinitio_results
 mkdir pdbs
 
 mv *.pdb /de-app-work/abinitio_results/pdbs
+mv /de-app-work/abinitio_results/pdbs/$input_pdb ../
+
 
 # Sort results by best-scoring structure and compute a Score-vs-RMSD plot
 cat score.fsc | (read -r; printf "%s\n" "$REPLY"; sort -n -k2 ) > score-sorted.fsc
-awk '{print $2 "\t" $14}' score-sorted.fsc | awk 'NR >1' > score-vs-rmsd.dat
+/working_dir/score_scatter_plot.py --x_axis=score --y_axis=rms --silent=outfile.silent.o score-vs-rmsd.dat
+
+#awk '{print $2 "\t" $14}' score-sorted.fsc | awk 'NR >1' > score-vs-rmsd.dat
 
 # Generate a Rosetta energy vs RSMD scatter plot
 python /working_dir/plot-score-vs-rmsd.py
 
 rm score-vs-rmsd.dat
+rm input_pdb.txt

@@ -14,5 +14,9 @@ COPY AbinitioRelax.static.linuxgccrelease ${WD}
 COPY extract_pdbs.static.linuxgccrelease ${WD}
 COPY wrapper_abinitio.sh ${WD} 
 COPY plot-score-vs-rmsd.py ${WD}
+COPY rosettautil/ ${WD}/rosettautil
+COPY score_scatter_plot.py ${WD}
+
+ENV PATH /working_dir/rosettautil:$PATH
 
 ENTRYPOINT ["/working_dir/wrapper_abinitio.sh"]
